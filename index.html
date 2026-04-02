@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Readiness Friction Diagnostic | Pearson</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pp:   #0D004D;
+      --white: #FFFFFF;
+      --lp:   #C1BFFF;
+      --mist: #EDECF6;
+      --ame:  #512EAB;
+      --tq:   #56E2E1;
+      --amb:  #FFCE00;
+      --fuch: #DF41CF;
+      --ux:   #333333;
+      --font: 'Plus Jakarta Sans', Helvetica, Verdana, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      font-variant-ligatures: none;
+      background: var(--mist);
+      color: var(--pp);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCREEN SYSTEM ─────────────────────────────────── */
+    .screen {
+      position: fixed; inset: 0;
+      overflow-y: auto;
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .screen.hidden { opacity: 0; pointer-events: none; transform: translateY(18px); }
+
+    /* ─── SHARED ─────────────────────────────────────────── */
+    .eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+    }
+
+    /* ─── INTRO SCREEN ───────────────────────────────────── */
+    #screen-intro {
+      background: var(--pp);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 40px 24px;
+      position: relative;
+    }
+
+    .intro-page-logo {
+      position: absolute; top: 32px; left: 40px;
+    }
+
+    .intro-card {
+      width: 100%; max-width: 660px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(193,191,255,.15);
+      border-radius: 20px;
+      padding: 44px 48px 40px;
+    }
+
+    .intro-logo { margin-bottom: 28px; display: block; }
+
+    .intro-category {
+      display: inline-flex; align-items: center;
+      padding: 6px 14px;
+      border: 1px solid rgba(193,191,255,.3);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--lp);
+      margin-bottom: 24px;
+    }
+
+    .intro-h1 {
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 700; color: var(--lp); line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .intro-desc {
+      font-size: 15px; line-height: 1.7;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 28px;
+    }
+
+    .feature-chips {
+      display: flex; flex-wrap: nowrap; gap: 10px; margin-bottom: 32px;
+    }
+    .feature-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(193,191,255,.12);
+      border-radius: 8px;
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,.75);
+    }
+    .feature-chip-icon { font-size: 14px; line-height: 1; }
+
+    .btn-start {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 28px;
+      background: var(--ame); color: #fff;
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 15px; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+    .btn-start:hover { background: #6a3fc0; transform: translateY(-2px); }
+    .btn-start .arr { transition: transform .2s; }
+    .btn-start:hover .arr { transform: translateX(4px); }
+
+    /* ─── DIAGNOSTIC SCREEN ──────────────────────────────── */
+    #screen-diagnostic {
+      background: var(--pp);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+
+    .q-card {
+      width: 100%; max-width: 660px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(193,191,255,.15);
+      border-radius: 16px;
+      padding: 36px 40px 32px;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    /* Card top row: friction label + question counter */
+    .q-card-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .q-friction-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--tq);
+    }
+    .q-counter {
+      font-size: 13px; font-weight: 500; color: rgba(193,191,255,.6);
+    }
+
+    /* Thin progress line inside card */
+    .q-progress-track {
+      height: 2px; background: rgba(193,191,255,.15);
+      border-radius: 1px; margin-bottom: 28px; overflow: hidden;
+    }
+    .q-progress-fill {
+      height: 100%; background: var(--tq);
+      border-radius: 1px; transition: width .4s ease;
+    }
+
+    .q-text {
+      font-size: clamp(18px, 2.4vw, 24px); font-weight: 500;
+      color: #fff; line-height: 1.45; margin-bottom: 36px;
+    }
+
+    /* Horizontal 1-5 scale */
+    .scale-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(0,0,0,.25);
+      border-radius: 12px; padding: 18px 22px;
+      margin-bottom: 32px;
+    }
+    .scale-end {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(193,191,255,.5);
+      flex-shrink: 0;
+    }
+    .scale-nums {
+      display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center;
+    }
+    .scale-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid rgba(193,191,255,.3);
+      background: transparent; color: rgba(255,255,255,.75);
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .18s; flex-shrink: 0;
+    }
+    .scale-num:hover { border-color: var(--lp); color: #fff; background: rgba(193,191,255,.1); }
+    .scale-num.sel { background: var(--ame); border-color: var(--ame); color: #fff; }
+
+    /* Back / Next footer */
+    .diag-foot {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .btn-back {
+      padding: 12px 24px; background: transparent;
+      border: 1.5px solid rgba(193,191,255,.25); border-radius: 8px;
+      color: rgba(193,191,255,.6); font-family: var(--font); font-variant-ligatures: none;
+      font-size: 14px; font-weight: 500; cursor: pointer; transition: all .18s;
+    }
+    .btn-back:hover { border-color: rgba(193,191,255,.5); color: var(--lp); }
+    .btn-back.hidden-back { visibility: hidden; pointer-events: none; }
+
+    .btn-next {
+      padding: 12px 28px; background: var(--ame); color: #fff;
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 14px; font-weight: 600; border: none; border-radius: 8px;
+      cursor: pointer; opacity: .35; pointer-events: none; transition: all .2s;
+    }
+    .btn-next.on { opacity: 1; pointer-events: all; }
+    .btn-next.on:hover { background: #6a3fc0; transform: translateY(-1px); }
+
+    /* ─── RESULTS SCREEN ─────────────────────────────────── */
+    #screen-results { background: var(--mist); min-height: 100vh; }
+
+    .res-hero { background: var(--pp); padding: 36px 56px 36px; }
+    .res-hero-inner { max-width: 1120px; margin: 0 auto; }
+
+    .res-topbar {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 52px;
+    }
+
+    .res-logo-row { display: flex; align-items: center; }
+
+    .res-eyebrow { color: var(--tq); margin-bottom: 12px; }
+    .res-h1 {
+      font-size: clamp(32px, 4.5vw, 54px); font-weight: 700;
+      color: #fff; line-height: 1.08; margin-bottom: 8px;
+    }
+    .res-sub { font-size: 17px; font-weight: 300; color: var(--lp); }
+
+    /* Friction banners row */
+    .friction-row {
+      margin-top: 44px;
+      display: flex; gap: 16px; align-items: stretch;
+    }
+
+    /* Primary friction banner */
+    .primary-banner {
+      flex: 1;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(193,191,255,.25);
+      border-radius: 14px;
+      padding: 36px 40px;
+      display: flex; align-items: center; gap: 32px;
+    }
+
+    .pf-score-block { flex-shrink: 0; text-align: center; }
+    .pf-pct {
+      font-size: 64px; font-weight: 700; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pf-pct-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(255,255,255,.45);
+    }
+
+    .pf-divider { width: 1px; height: 80px; background: rgba(255,255,255,.15); flex-shrink: 0; }
+
+    .pf-content { flex: 1; }
+    .pf-tag { color: var(--tq); margin-bottom: 8px; }
+    .pf-name { font-size: clamp(26px, 3.5vw, 40px); font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .pf-desc { font-size: 14px; color: var(--lp); line-height: 1.6; font-weight: 300; max-width: 440px; }
+
+    /* Secondary friction banner */
+    .secondary-banner {
+      width: 372px; flex-shrink: 0;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(193,191,255,.15);
+      border-radius: 14px;
+      padding: 28px 28px;
+      display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    }
+
+    .sf-tag { color: rgba(193,191,255,.55); margin-bottom: 2px; }
+    .sf-pct { font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+    .sf-name { font-size: 18px; font-weight: 700; color: rgba(255,255,255,.85); }
+    .sf-desc { font-size: 12px; color: rgba(193,191,255,.5); line-height: 1.5; font-weight: 300; }
+
+    /* Results body */
+    .res-body { max-width: 1120px; margin: 0 auto; padding: 56px 0 80px; }
+
+    .res-grid {
+      display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: start;
+    }
+
+    .sec-label { color: var(--ame); margin-bottom: 18px; }
+
+    /* Heat map card */
+    .hm-card {
+      background: #fff; border-radius: 16px; padding: 32px;
+      box-shadow: 0 4px 28px rgba(13,0,77,.07);
+    }
+    .hm-title { font-size: 18px; font-weight: 700; color: var(--pp); margin-bottom: 4px; }
+    .hm-sub { font-size: 13px; color: #999; margin-bottom: 20px; }
+
+    #heatmap-svg { width: 100%; height: auto; display: block; }
+
+    .hm-legend {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 12px; font-size: 12px; color: #aaa;
+    }
+    .hm-legend-bar {
+      flex: 1; height: 6px; border-radius: 3px;
+      background: linear-gradient(to right, #56E2E1, #FFCE00, #DF41CF);
+    }
+
+    /* All frictions grid */
+    .all-fric { margin-top: 40px; }
+    .fric-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px;
+    }
+
+    .fric-card {
+      background: #fff; border-radius: 10px; padding: 18px 20px;
+      border-top: 4px solid transparent;
+      box-shadow: 0 2px 14px rgba(13,0,77,.05);
+    }
+    .fric-card-name {
+      font-size: 14px; font-weight: 700; color: var(--pp); margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .fric-card-primary-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--tq); background: var(--pp);
+      padding: 3px 7px; border-radius: 3px;
+    }
+    .bar-track { height: 5px; background: #eee; border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+    .bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1.2s ease; }
+    .bar-label { font-size: 12px; color: #aaa; font-weight: 500; }
+
+    /* Insights panel */
+    .insights { display: flex; flex-direction: column; gap: 24px; }
+
+    .ins-card {
+      background: #fff; border-radius: 12px; padding: 28px;
+      box-shadow: 0 4px 20px rgba(13,0,77,.06);
+    }
+    .ins-card-label { margin-bottom: 14px; }
+    .ins-body { font-size: 15px; line-height: 1.75; color: var(--ux); }
+
+    .ins-quote {
+      border-left: 3px solid var(--tq); padding-left: 18px;
+      font-size: 16px; font-style: italic; color: var(--pp); line-height: 1.65;
+    }
+
+    .recs { display: flex; flex-direction: column; gap: 14px; }
+    .rec { display: flex; gap: 14px; align-items: flex-start; }
+    .rec-n {
+      width: 26px; height: 26px; border-radius: 50%; background: var(--pp);
+      color: #fff; font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .rec-text { font-size: 14px; line-height: 1.65; color: var(--ux); padding-top: 3px; }
+
+    .btn-restart {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; background: var(--pp); color: #fff;
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 14px; font-weight: 600; border: none; border-radius: 4px;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-restart:hover { background: var(--ame); transform: translateY(-2px); }
+
+    /* Email capture */
+    .email-strip { background: var(--ame); padding: 56px; }
+    .email-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .email-h { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .email-sub { font-size: 15px; color: var(--lp); font-weight: 300; margin-bottom: 28px; line-height: 1.6; }
+    .email-row { display: flex; gap: 10px; }
+    .email-in {
+      flex: 1; padding: 14px 18px; background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.3); border-radius: 4px;
+      color: #fff; font-family: var(--font); font-variant-ligatures: none; font-size: 14px;
+    }
+    .email-in::placeholder { color: rgba(255,255,255,.45); }
+    .email-in:focus { outline: none; border-color: var(--tq); }
+    .btn-email {
+      padding: 14px 24px; background: var(--tq); color: var(--pp);
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 14px; font-weight: 700; border: none; border-radius: 4px;
+      cursor: pointer; white-space: nowrap; transition: transform .2s;
+    }
+    .btn-email:hover { transform: translateY(-2px); }
+    .email-skip {
+      margin-top: 14px; font-size: 12px; color: rgba(255,255,255,.4);
+      cursor: pointer; text-decoration: underline;
+    }
+
+    /* Report CTA */
+    .report-strip { background: var(--pp); padding: 64px 56px; text-align: center; display: none; }
+    .report-inner { max-width: 560px; margin: 0 auto; }
+    .report-h { font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .report-sub { font-size: 15px; color: var(--lp); font-weight: 300; margin-bottom: 32px; line-height: 1.65; }
+    .btn-report {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 38px; background: #fff; color: var(--pp);
+      font-family: var(--font); font-variant-ligatures: none;
+      font-size: 16px; font-weight: 700; border: none; border-radius: 4px;
+      cursor: pointer; transition: transform .2s; text-decoration: none;
+    }
+    .btn-report:hover { transform: translateY(-2px); }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .45s ease forwards; }
+
+    @keyframes hexGlow {
+      0%,100% { opacity: .25; }
+      50% { opacity: .55; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .res-grid { grid-template-columns: 1fr; }
+      .fric-cards { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 680px) {
+      .res-hero, .res-body, .email-strip, .report-strip { padding-left: 24px; padding-right: 24px; }
+      .intro-card { padding: 32px 28px; }
+      .diag-topbar { padding: 14px 20px; }
+      .diag-body { padding: 36px 20px; }
+      .friction-row { flex-direction: column; }
+      .secondary-banner { width: 100%; }
+      .primary-banner { flex-direction: column; gap: 20px; }
+      .pf-divider { width: 100%; height: 1px; }
+      .fric-cards { grid-template-columns: 1fr; }
+      .email-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 · INTRO
+═══════════════════════════════════════ -->
+<div id="screen-intro" class="screen">
+  <img src="pearson-logo-white.svg" alt="Pearson" height="59" class="intro-page-logo"/>
+  <div class="intro-card">
+
+    <h1 class="intro-h1">AI Readiness &amp; Friction<br><span style="color:#fff">Diagnostic</span></h1>
+
+    <p class="intro-desc">
+      Identify the strategic friction points slowing down your institution's journey toward AI adoption.
+    </p>
+
+    <div class="feature-chips">
+      <span class="feature-chip"><span class="feature-chip-icon">⏱</span> Takes ~3 minutes</span>
+      <span class="feature-chip"><span class="feature-chip-icon">🗺</span> Actionable Heatmap</span>
+      <span class="feature-chip"><span class="feature-chip-icon">✦</span> Tailored for HigherEd</span>
+    </div>
+
+    <button class="btn-start" onclick="startDiagnostic()">
+      Start Diagnostic
+      <span class="arr" aria-hidden="true">→</span>
+    </button>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 · DIAGNOSTIC
+═══════════════════════════════════════ -->
+<div id="screen-diagnostic" class="screen hidden">
+
+  <div class="q-card" id="q-card">
+    <div class="q-card-top">
+      <span class="q-friction-label" id="q-friction-label"></span>
+      <span class="q-counter" id="q-counter" aria-live="polite">1/12</span>
+    </div>
+    <div class="q-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-role">
+      <div class="q-progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <h2 class="q-text" id="q-text"></h2>
+    <div class="scale-row" role="radiogroup" aria-label="Scale 1 to 5">
+      <span class="scale-end">Not at all</span>
+      <div class="scale-nums" id="scale-nums"></div>
+      <span class="scale-end">Extensively</span>
+    </div>
+    <div class="diag-foot">
+      <button class="btn-back hidden-back" id="btn-back" onclick="prevQ()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">Next →</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 · RESULTS
+═══════════════════════════════════════ -->
+<div id="screen-results" class="screen hidden">
+
+  <section class="res-hero">
+    <div class="res-hero-inner">
+
+      <div class="res-topbar">
+        <div>
+          <p class="eyebrow res-eyebrow">Your Results</p>
+          <h2 class="res-h1">Your AI Readiness<br>Friction Profile</h2>
+          <p class="res-sub">Across 6 dimensions of the AI Readiness Framework</p>
+        </div>
+      </div>
+
+      <!-- Friction banners (filled by JS) -->
+      <div class="friction-row">
+        <div class="primary-banner" id="primary-banner"></div>
+        <div class="secondary-banner" id="secondary-banner"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <main class="res-body">
+    <div class="res-grid">
+
+      <!-- LEFT: heat map + summary grid -->
+      <div>
+        <p class="eyebrow sec-label">Friction Heat Map</p>
+        <div class="hm-card">
+          <h3 class="hm-title">Your Friction Landscape</h3>
+          <p class="hm-sub">Each cell shows friction intensity — cooler tones signal lower friction, warmer tones signal higher friction</p>
+          <svg id="heatmap-svg" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" aria-label="Hexagonal heat map showing 6 friction areas"></svg>
+          <div class="hm-legend" aria-label="Legend: left is low friction, right is high friction">
+            <span>Low friction</span>
+            <div class="hm-legend-bar" aria-hidden="true"></div>
+            <span>High friction</span>
+          </div>
+        </div>
+
+        <div class="all-fric">
+          <p class="eyebrow sec-label">All Friction Areas</p>
+          <div class="fric-cards" id="fric-cards"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: insights panel (filled by JS) -->
+      <div class="insights" id="insights"></div>
+
+    </div>
+  </main>
+
+  <section class="email-strip" id="email-strip">
+    <div class="email-inner">
+      <h3 class="email-h">Get the full research report</h3>
+      <p class="email-sub">Receive the complete Pearson × AWS AI Readiness findings — including evidence-led recommendations and case studies matched to your primary friction area.</p>
+      <div class="email-row">
+        <input class="email-in" type="email" placeholder="Your institutional email address" id="email-val" aria-label="Email address"/>
+        <button class="btn-email" onclick="submitEmail()">Send Report →</button>
+      </div>
+      <p class="email-skip" onclick="skipEmail()" role="button" tabindex="0">No thanks, continue without the report</p>
+    </div>
+  </section>
+
+  <section class="report-strip" id="report-strip">
+    <div class="report-inner">
+      <h3 class="report-h">Explore the full research</h3>
+      <p class="report-sub">The AI Readiness Report contains in-depth analysis, real-world case studies, and evidence-led frameworks for every friction area in the framework.</p>
+      <a href="https://www.pearson.com" class="btn-report">Access the Full Report →</a>
+    </div>
+  </section>
+
+</div>
+
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════════ */
+const FRICTIONS = [
+  {
+    id: 'pace',
+    name: 'Pace',
+    desc: 'The widening gap between the speed of AI-driven workplace change and the slower cadence of curriculum and institutional decision-making.',
+    qs: [
+      'How are you monitoring the distance between AI developments in the workplace and what is currently reflected in your curricula?',
+      'How are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
+    ],
+    insight: 'Your institution may be teaching yesterday\'s skills for tomorrow\'s workforce. AI capabilities are evolving faster than traditional curriculum cycles — and the gap is widening faster than most leaders recognise.',
+    reframe: '"Many leaders believe annual curriculum reviews are sufficient. The evidence shows AI-relevant skills are shifting on a quarterly cycle — institutions that wait fall measurably behind."',
+    recs: [
+      'Establish a real-time labour market intelligence feed connected directly to curriculum governance',
+      'Create a rapid curriculum update pathway that bypasses standard review timelines for AI-critical content',
+      'Build faculty AI fluency programmes that run in parallel with curriculum updates, not after them'
+    ]
+  },
+  {
+    id: 'connection',
+    name: 'Connection',
+    desc: 'Weak feedback loops between education and employers, reducing alignment between workforce needs and learning design.',
+    qs: [
+      'How are you systematically capturing shifting workforce requirements from employers — and how rapidly does that intelligence reach curriculum decisions?',
+      'How are your academic leaders actively collaborating with industry partners to shape graduate outcomes?'
+    ],
+    insight: 'Strong employer relationships are the bridge between institutional intent and graduate outcomes. Without systematic intelligence-gathering, even well-designed programmes miss the mark on day-one readiness.',
+    reframe: '"Many institutions have employer advisory boards. Few have mechanisms that translate employer insight into curriculum change within months, not years — and graduates pay the price."',
+    recs: [
+      'Create industry advisory boards with binding curriculum input mechanisms and clear delivery timelines',
+      'Implement quarterly employer skills surveys with direct links to academic planning processes',
+      'Establish co-design frameworks where industry partners actively shape AI module content'
+    ]
+  },
+  {
+    id: 'capability',
+    name: 'Capability',
+    desc: 'Uneven faculty and instructor AI capability, limiting consistent integration of AI into learning experiences.',
+    qs: [
+      'How are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiative?',
+      'How are you sustaining faculty AI development as a continuous institutional commitment rather than a one-time intervention?'
+    ],
+    insight: 'Individual faculty champions can only take you so far. Institutional AI capability requires systematic investment — not reliance on enthusiastic early adopters carrying the weight for everyone else.',
+    reframe: '"Many institutions have run AI training workshops. Few have built the ongoing professional development infrastructure to sustain capability at scale — the difference shows in student outcomes."',
+    recs: [
+      'Launch a structured faculty AI development programme with mandatory baseline standards for all staff',
+      'Create peer learning networks that scale expertise beyond individual champions and early adopters',
+      'Invest in continuous professional development rather than treating it as a one-time training event'
+    ]
+  },
+  {
+    id: 'governance',
+    name: 'Governance',
+    desc: 'The absence of clear, practical guidance translating AI access into responsible, governed practice.',
+    qs: [
+      'How are you communicating institutional AI policy in a way that is experienced as enabling and supportive rather than punitive or restrictive?',
+      'How are you embedding ethics and responsible AI use as a core requirement across all disciplines, rather than as a niche or elective provision?'
+    ],
+    insight: 'Restrictive or unclear AI governance creates a vacuum — students and faculty work around policies rather than within them. Governance that enables rather than prohibits is the foundation for responsible innovation.',
+    reframe: '"Many institutions have published AI policies. Few have governance that faculty and students experience as clear, enabling, and consistently applied across departments."',
+    recs: [
+      'Reframe your AI policy as an enabling framework, not a compliance document',
+      'Ensure coherence between institutional policy, departmental guidance, and course-level expectations',
+      'Embed ethical AI stewardship as a discipline-wide requirement, not a standalone or optional module'
+    ]
+  },
+  {
+    id: 'experience',
+    name: 'Experience',
+    desc: 'A disconnect between access to AI tools and structured opportunities to practise, apply, and demonstrate real-world capability.',
+    qs: [
+      'How are you structuring student AI engagement to include both task-level shortcuts as well as authentic workplace applications?',
+      'How are you identifying and addressing the competency gaps that represent the most significant barriers to graduate employability?'
+    ],
+    insight: 'Using AI for shortcuts and using AI for authentic professional work are very different competencies. Without deliberate design, students develop surface-level familiarity rather than genuine workplace readiness.',
+    reframe: '"Many institutions have integrated AI tools into courses. Few have mapped those integrations to real employer scenarios and verified that graduates can perform — not just use — AI in professional contexts."',
+    recs: [
+      'Map AI integration points across the student journey to real workplace scenarios and employer expectations',
+      'Create assessments that require demonstration of applied AI competency, not just AI-assisted outputs',
+      'Establish graduate AI competency benchmarks in partnership with employers across key disciplines'
+    ]
+  },
+  {
+    id: 'skills',
+    name: 'Skills',
+    desc: 'Misalignment between the capabilities graduates demonstrate and the applied judgment, adaptability, and collaboration employers require.',
+    qs: [
+      'How are you balancing the development of functional AI proficiency with the cultivation of strategic intelligence, ethical stewardship, and critical human skills?',
+      'How are you translating employer feedback on day-one graduate readiness into tangible changes in what and how you teach?'
+    ],
+    insight: 'Functional AI proficiency is necessary but not sufficient. The graduates who thrive will combine technical fluency with strategic intelligence, ethical judgement, and distinctly human capabilities.',
+    reframe: '"Many institutions are focused on AI tool proficiency. Employers consistently report that what they need is graduates who can think with AI, not just operate it."',
+    recs: [
+      'Map curricula against all four graduate AI capability dimensions: functional, strategic, ethical, and human',
+      'Create visible pathways for students to develop and demonstrate AI-adjacent skills across disciplines',
+      'Use employer feedback loops to continuously validate and refine the skills portfolio you\'re building'
+    ]
+  }
+];
+
+const RESPONSES = [
+  { label: 'Not yet started',   val: 1 },
+  { label: 'Early exploration', val: 2 },
+  { label: 'Developing',        val: 3 },
+  { label: 'Well established',  val: 4 },
+  { label: 'Leading practice',  val: 5 }
+];
+
+// Interleaved question order: all Q1s then all Q2s
+const SEQ = [
+  ...FRICTIONS.map((f,i) => ({ fi: i, qi: 0 })),
+  ...FRICTIONS.map((f,i) => ({ fi: i, qi: 1 }))
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let curr = 0;
+let answers = new Array(12).fill(null);
+let sel = null;
+
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  const el = document.getElementById('screen-' + id);
+  el.classList.remove('hidden');
+  el.scrollTop = 0;
+}
+
+function startDiagnostic() {
+  curr = 0; answers = new Array(12).fill(null); sel = null;
+  showScreen('diagnostic');
+  renderQ();
+}
+
+function nextQ() {
+  if (sel === null) return;
+  answers[curr] = sel;
+  curr++;
+  sel = null;
+  if (curr >= SEQ.length) buildResults();
+  else renderQ();
+}
+
+/* ═══════════════════════════════════════════════════════
+   QUESTION RENDERING
+═══════════════════════════════════════════════════════ */
+function renderQ() {
+  const { fi, qi } = SEQ[curr];
+  const f = FRICTIONS[fi];
+
+  const pct = ((curr + 1) / SEQ.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-role').setAttribute('aria-valuenow', Math.round(pct));
+  document.getElementById('q-counter').textContent = `${curr+1}/12`;
+  document.getElementById('q-friction-label').textContent = f.name;
+  document.getElementById('q-text').textContent = f.qs[qi];
+
+  // Build 1-5 scale buttons
+  const nums = document.getElementById('scale-nums');
+  nums.innerHTML = '';
+  for (let v = 1; v <= 5; v++) {
+    const btn = document.createElement('button');
+    btn.className = 'scale-num' + (answers[curr] === v ? ' sel' : '');
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-label', `${v} out of 5`);
+    btn.setAttribute('aria-checked', answers[curr] === v ? 'true' : 'false');
+    btn.textContent = v;
+    btn.onclick = () => pick(v, btn);
+    nums.appendChild(btn);
+  }
+
+  // Back button visibility
+  const bk = document.getElementById('btn-back');
+  bk.classList.toggle('hidden-back', curr === 0);
+
+  // Next button
+  const nx = document.getElementById('btn-next');
+  nx.textContent = curr < SEQ.length - 1 ? 'Next →' : 'See My Results →';
+  nx.classList.toggle('on', answers[curr] !== null);
+
+  // Pre-select saved answer if navigating back
+  sel = answers[curr];
+
+  // Animate card in
+  const card = document.getElementById('q-card');
+  card.style.opacity = '0'; card.style.transform = 'translateY(12px)';
+  requestAnimationFrame(() => {
+    card.style.transition = 'opacity .3s ease, transform .3s ease';
+    card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+  });
+}
+
+function pick(val, btn) {
+  sel = val;
+  document.querySelectorAll('.scale-num').forEach(b => {
+    b.classList.remove('sel');
+    b.setAttribute('aria-checked', 'false');
+  });
+  btn.classList.add('sel');
+  btn.setAttribute('aria-checked', 'true');
+  document.getElementById('btn-next').classList.add('on');
+}
+
+function prevQ() {
+  if (curr === 0) return;
+  answers[curr] = sel;
+  curr--;
+  sel = answers[curr];
+  renderQ();
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCORING
+═══════════════════════════════════════════════════════ */
+function computeScores() {
+  return FRICTIONS.map((f, fi) => {
+    const a1 = answers[fi]   || 1;   // Q1 index = fi
+    const a2 = answers[fi+6] || 1;   // Q2 index = fi+6
+    const avg = (a1 + a2) / 2;
+    const readiness = (avg - 1) / 4;
+    const friction  = 1 - readiness;
+    return { id: f.id, readiness, friction, pct: Math.round(friction * 100) };
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   COLOUR INTERPOLATION
+═══════════════════════════════════════════════════════ */
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function h2r(hex) {
+  const h = hex.replace('#','');
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+}
+
+function r2h(r,g,b) {
+  return '#'+[r,g,b].map(v => Math.round(v).toString(16).padStart(2,'0')).join('');
+}
+
+function frictionColor(f) {
+  // 0 = low friction → turquoise; 1 = high → fuchsia
+  const stops = [
+    [0,    h2r('#56E2E1')],
+    [0.3,  h2r('#FFE67F')],
+    [0.55, h2r('#FFCE00')],
+    [0.78, h2r('#EFA0E7')],
+    [1,    h2r('#DF41CF')]
+  ];
+  for (let i = 0; i < stops.length-1; i++) {
+    const [t0,c0] = stops[i], [t1,c1] = stops[i+1];
+    if (f <= t1) {
+      const t = (f-t0)/(t1-t0);
+      return r2h(lerp(c0[0],c1[0],t), lerp(c0[1],c1[1],t), lerp(c0[2],c1[2],t));
+    }
+  }
+  return '#DF41CF';
+}
+
+function isDark(hex) {
+  const [r,g,b] = h2r(hex);
+  return (r*.299 + g*.587 + b*.114) < 155;
+}
+
+/* ═══════════════════════════════════════════════════════
+   HEX HEAT MAP (SVG)
+═══════════════════════════════════════════════════════ */
+function hexPts(cx, cy, r) {
+  return Array.from({length:6}, (_,i) => {
+    const a = (i*60-90)*Math.PI/180;
+    return `${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
+  }).join(' ');
+}
+
+function buildHeatMap(scores, primaryId) {
+  const CX=300, CY=256, RING=158, R=68;
+
+  const pos = FRICTIONS.map((f,i) => {
+    const a = (i*60-90)*Math.PI/180;
+    return { x: CX+RING*Math.cos(a), y: CY+RING*Math.sin(a), f };
+  });
+
+  let s = '<defs>';
+  // Define a radial gradient per hex for depth
+  pos.forEach((p,i) => {
+    const score = scores[i];
+    const col   = frictionColor(score.friction);
+    const colL  = frictionColor(Math.max(0, score.friction - 0.18));
+    s += `<radialGradient id="hg${i}" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="${colL}"/>
+      <stop offset="100%" stop-color="${col}"/>
+    </radialGradient>`;
+  });
+  s += '</defs>';
+
+  // Connector ring lines
+  s += '<g opacity=".12">';
+  pos.forEach((p,i) => {
+    const n = pos[(i+1)%6];
+    s += `<line x1="${p.x.toFixed(1)}" y1="${p.y.toFixed(1)}" x2="${n.x.toFixed(1)}" y2="${n.y.toFixed(1)}" stroke="#0D004D" stroke-width="1.5"/>`;
+  });
+  // Diameter lines (dashed)
+  [[0,3],[1,4],[2,5]].forEach(([a,b]) => {
+    s += `<line x1="${pos[a].x.toFixed(1)}" y1="${pos[a].y.toFixed(1)}" x2="${pos[b].x.toFixed(1)}" y2="${pos[b].y.toFixed(1)}" stroke="#0D004D" stroke-width="1" stroke-dasharray="5,5"/>`;
+  });
+  s += '</g>';
+
+  // Center label
+  s += `<text x="${CX}" y="${CY-6}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="#0D004D" opacity=".3" style="font-variant-ligatures:none;letter-spacing:2px">AI READINESS</text>`;
+  s += `<text x="${CX}" y="${CY+8}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="#0D004D" opacity=".3" style="font-variant-ligatures:none;letter-spacing:2px">FRAMEWORK</text>`;
+
+  // Hexagons
+  pos.forEach((p,i) => {
+    const score   = scores[i];
+    const col     = frictionColor(score.friction);
+    const dark    = isDark(col);
+    const tc      = dark ? '#fff' : '#0D004D';
+    const isPrim  = FRICTIONS[i].id === primaryId;
+
+    // Glow ring for primary
+    if (isPrim) {
+      s += `<polygon points="${hexPts(p.x,p.y,R+10)}" fill="${col}" opacity=".18"/>`;
+      s += `<polygon points="${hexPts(p.x,p.y,R+5)}"  fill="${col}" opacity=".28"/>`;
+    }
+
+    // Main hex
+    s += `<polygon points="${hexPts(p.x,p.y,R)}" fill="url(#hg${i})" stroke="white" stroke-width="2.5"/>`;
+
+    // "PRIMARY" badge above
+    if (isPrim) {
+      s += `<text x="${p.x.toFixed(1)}" y="${(p.y-R-10).toFixed(1)}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" font-weight="700" fill="${col}" style="font-variant-ligatures:none;letter-spacing:1.5px">▲ PRIMARY</text>`;
+    }
+
+    // Friction name
+    s += `<text x="${p.x.toFixed(1)}" y="${(p.y-14).toFixed(1)}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="700" fill="${tc}" style="font-variant-ligatures:none;letter-spacing:1px">${FRICTIONS[i].name.toUpperCase()}</text>`;
+
+    // Score %
+    s += `<text x="${p.x.toFixed(1)}" y="${(p.y+12).toFixed(1)}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="28" font-weight="700" fill="${tc}" style="font-variant-ligatures:none">${score.pct}%</text>`;
+
+    // Intensity label
+    const lbl = score.pct >= 65 ? 'HIGH' : score.pct >= 35 ? 'MEDIUM' : 'LOW';
+    s += `<text x="${p.x.toFixed(1)}" y="${(p.y+28).toFixed(1)}" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" font-weight="600" fill="${tc}" opacity=".65" style="font-variant-ligatures:none;letter-spacing:1px">${lbl} FRICTION</text>`;
+  });
+
+  document.getElementById('heatmap-svg').innerHTML = s;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUILD RESULTS
+═══════════════════════════════════════════════════════ */
+function buildResults() {
+  const scores    = computeScores();
+  const sorted    = [...scores].sort((a,b) => b.friction - a.friction);
+  const primary   = sorted[0];
+  const secondary = sorted[1];
+  const pf        = FRICTIONS.find(f => f.id === primary.id);
+  const sf        = FRICTIONS.find(f => f.id === secondary.id);
+  const pcol      = frictionColor(primary.friction);
+  const scol      = frictionColor(secondary.friction);
+
+  // Primary banner
+  document.getElementById('primary-banner').innerHTML = `
+    <div class="pf-score-block">
+      <div class="pf-pct" style="color:${pcol}">${primary.pct}%</div>
+      <div class="pf-pct-label">Friction</div>
+    </div>
+    <div class="pf-divider" aria-hidden="true"></div>
+    <div class="pf-content">
+      <p class="eyebrow pf-tag">Primary Friction Point</p>
+      <h3 class="pf-name">${pf.name}</h3>
+      <p class="pf-desc">${pf.desc}</p>
+    </div>
+  `;
+
+  // Secondary banner
+  document.getElementById('secondary-banner').innerHTML = `
+    <p class="eyebrow sf-tag">Secondary</p>
+    <div class="sf-pct" style="color:${scol}">${secondary.pct}%</div>
+    <div class="sf-name">${sf.name}</div>
+    <div class="sf-desc">${sf.desc}</div>
+  `;
+
+  // Heat map
+  buildHeatMap(scores, primary.id);
+
+  // Summary cards
+  const cards = document.getElementById('fric-cards');
+  cards.innerHTML = FRICTIONS.map((f,i) => {
+    const s    = scores[i];
+    const col  = frictionColor(s.friction);
+    const prim = f.id === primary.id;
+    return `
+      <div class="fric-card" style="border-top-color:${col}">
+        <div class="fric-card-name">
+          ${f.name}
+          ${prim ? '<span class="fric-card-primary-tag">Primary</span>' : ''}
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:${col}" data-w="${s.pct}"></div>
+        </div>
+        <div class="bar-label">${s.pct}% friction</div>
+      </div>
+    `;
+  }).join('');
+
+  // Insights
+  document.getElementById('insights').innerHTML = `
+    <div>
+      <p class="eyebrow sec-label ins-card-label">Why this matters</p>
+      <div class="ins-card">
+        <p class="ins-body">${pf.insight}</p>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow sec-label ins-card-label">What the evidence shows</p>
+      <div class="ins-card">
+        <p class="ins-quote">${pf.reframe}</p>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow sec-label ins-card-label">Recommended actions</p>
+      <div class="ins-card">
+        <div class="recs">
+          ${pf.recs.map((r,i) => `
+            <div class="rec">
+              <div class="rec-n" aria-hidden="true">${i+1}</div>
+              <p class="rec-text">${r}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn-restart" onclick="restartDiagnostic()">← Retake Diagnostic</button>
+    </div>
+  `;
+
+  showScreen('results');
+
+  // Animate bars after render
+  requestAnimationFrame(() => setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => {
+      const w = el.getAttribute('data-w');
+      el.style.width = w + '%';
+    });
+  }, 200));
+}
+
+function restartDiagnostic() { showScreen('intro'); }
+
+function submitEmail() {
+  const v = document.getElementById('email-val').value.trim();
+  if (!v || !v.includes('@')) {
+    document.getElementById('email-val').focus();
+    return;
+  }
+  skipEmail();
+}
+
+function skipEmail() {
+  document.getElementById('email-strip').style.display = 'none';
+  document.getElementById('report-strip').style.display = 'block';
+}
+
+// Boot
+showScreen('intro');
+</script>
+
+</body>
+</html>
