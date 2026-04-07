@@ -21,12 +21,12 @@ const FRICTIONS = [
       'How are you monitoring the distance between AI developments in the workplace and what is currently reflected in your curricula?',
       'How are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
     ],
-    insight: 'Your institution may be teaching yesterday\'s skills for tomorrow\'s workforce. AI capabilities are evolving faster than traditional curriculum cycles — and the gap is widening faster than most leaders recognise.',
-    reframe: '"Many leaders believe annual curriculum reviews are sufficient. The evidence shows AI-relevant skills are shifting on a quarterly cycle — institutions that wait fall measurably behind."',
+    insight: 'AI is reshaping work faster than universities can adapt. When curriculum cycles lag behind workplace change, graduates enter the workforce with knowledge that is already obsolete relative to the tools industry deploys.',
+    reframe: 'Collectively, 66% of respondents (HE leaders, students, and employers) describe AI-driven workplace change as fast or very fast, with 70% of HE leaders expecting it to accelerate. Only 24% of respondents believe universities are keeping pace.',
     recs: [
-      'Establish a real-time labour market intelligence feed connected directly to curriculum governance',
-      'Create a rapid curriculum update pathway that bypasses standard review timelines for AI-critical content',
-      'Build faculty AI fluency programmes that run in parallel with curriculum updates, not after them'
+      'Accelerate curriculum review cycles through modular design and stackable, fast-iterating credentials.',
+      'Establish industry advisory boards that surface workforce shifts between formal review cycles.',
+      'Build agile review mechanisms that can update course content within months, not years.'
     ]
   },
   {
@@ -37,12 +37,12 @@ const FRICTIONS = [
       'How are you systematically capturing shifting workforce requirements from employers — and how rapidly does that intelligence reach curriculum decisions?',
       'How are your academic leaders actively collaborating with industry partners to shape graduate outcomes?'
     ],
-    insight: 'Strong employer relationships are the bridge between institutional intent and graduate outcomes. Without systematic intelligence-gathering, even well-designed programmes miss the mark on day-one readiness.',
-    reframe: '"Many institutions have employer advisory boards. Few have mechanisms that translate employer insight into curriculum change within months, not years — and graduates pay the price."',
+    insight: 'When employers and institutions are not in structured dialogue, curriculum decisions are made with incomplete or outdated workforce signals. The result is misalignment between what is taught and what work requires.',
+    reframe: 'Only 39% of institutions include industry partnerships among their AI investment focus areas, ranking last of six priorities. Yet 53% of employers say finding graduates with the right skills is their primary challenge.',
     recs: [
-      'Create industry advisory boards with binding curriculum input mechanisms and clear delivery timelines',
-      'Implement quarterly employer skills surveys with direct links to academic planning processes',
-      'Establish co-design frameworks where industry partners actively shape AI module content'
+      'Build structural, ongoing employer feedback loops that directly inform learning design and assessment.',
+      'Embed industry advisory boards into curriculum review and graduate outcome processes.',
+      'Co-design degree pathways and assessments with employer partners rather than for them.'
     ]
   },
   {
@@ -53,12 +53,12 @@ const FRICTIONS = [
       'How are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiative?',
       'How are you sustaining faculty AI development as a continuous institutional commitment rather than a one-time intervention?'
     ],
-    insight: 'Individual faculty champions can only take you so far. Institutional AI capability requires systematic investment — not reliance on enthusiastic early adopters carrying the weight for everyone else.',
-    reframe: '"Many institutions have run AI training workshops. Few have built the ongoing professional development infrastructure to sustain capability at scale — the difference shows in student outcomes."',
+    insight: 'Faculty are the primary vehicle for graduate AI readiness. When their capability is uneven, student outcomes depend on individual instructor initiative rather than consistent institutional design.',
+    reframe: 'Faculty AI expertise is the #1 barrier cited by 40% of HE leaders. Only 13% rate their facultys AI capability as very strong, and just 16% offer comprehensive ongoing AI training.',
     recs: [
-      'Launch a structured faculty AI development programme with mandatory baseline standards for all staff',
-      'Create peer learning networks that scale expertise beyond individual champions and early adopters',
-      'Invest in continuous professional development rather than treating it as a one-time training event'
+      'Treat faculty AI capability as core institutional infrastructure with sustained, ongoing professional development.',
+      'Create cross-disciplinary peer learning networks where faculty share applied AI teaching practices.',
+      'Embed AI capability development into hiring, promotion, and tenure criteria across departments.'
     ]
   },
   {
@@ -69,12 +69,12 @@ const FRICTIONS = [
       'How are you communicating institutional AI policy in a way that is experienced as enabling and supportive rather than punitive or restrictive?',
       'How are you embedding ethics and responsible AI use as a core requirement across all disciplines, rather than as a niche or elective provision?'
     ],
-    insight: 'Restrictive or unclear AI governance creates a vacuum — students and faculty work around policies rather than within them. Governance that enables rather than prohibits is the foundation for responsible innovation.',
-    reframe: '"Many institutions have published AI policies. Few have governance that faculty and students experience as clear, enabling, and consistently applied across departments."',
+    insight: 'When institutional AI guidance is absent, unclear, or perceived as punitive, students develop independent habits with no oversight. Those ungoverned habits can travel directly into the workplace as compliance and/or quality risks.',
+    reframe: '49% of students use independently sourced AI tools versus 19% using university tools. 62% cannot say with certainty whether their institution has AI policies in place.',
     recs: [
-      'Reframe your AI policy as an enabling framework, not a compliance document',
-      'Ensure coherence between institutional policy, departmental guidance, and course-level expectations',
-      'Embed ethical AI stewardship as a discipline-wide requirement, not a standalone or optional module'
+      'Replace prohibition-based policies with clear, enabling guidance integrated into everyday learning and assessment.',
+      'Communicate AI rules as supportive frameworks for ethical practice, not punitive boundaries to avoid.',
+      'Ensure consistent AI guidance across institutional, departmental, and individual course levels.'
     ]
   },
   {
@@ -85,12 +85,12 @@ const FRICTIONS = [
       'How are you structuring student AI engagement to include both task-level shortcuts as well as authentic workplace applications?',
       'How are you identifying and addressing the competency gaps that represent the most significant barriers to graduate employability?'
     ],
-    insight: 'Using AI for shortcuts and using AI for authentic professional work are very different competencies. Without deliberate design, students develop surface-level familiarity rather than genuine workplace readiness.',
-    reframe: '"Many institutions have integrated AI tools into courses. Few have mapped those integrations to real employer scenarios and verified that graduates can perform — not just use — AI in professional contexts."',
+    insight: 'Tool access without structured application does not produce applied capability. Students learn about AI but rarely have opportunities to work with it in authentic, assessed, workplace-relevant contexts.',
+    reframe: '68% of students are satisfied with access to AI tools, but only 18% are very satisfied with the depth of AI learning. Working alongside AI is the least-covered curriculum topic.',
     recs: [
-      'Map AI integration points across the student journey to real workplace scenarios and employer expectations',
-      'Create assessments that require demonstration of applied AI competency, not just AI-assisted outputs',
-      'Establish graduate AI competency benchmarks in partnership with employers across key disciplines'
+      'Embed structured, credit-bearing applied AI experiences into core curriculum across every degree program.',
+      'Partner with employers to host authentic, project-based AI work for students before graduation.',
+      'Design assessments around real workplace scenarios rather than theoretical or test-based AI knowledge.'
     ]
   },
   {
@@ -101,12 +101,12 @@ const FRICTIONS = [
       'How are you balancing the development of functional AI proficiency with the cultivation of strategic intelligence, ethical stewardship, and critical human skills?',
       'How are you translating employer feedback on day-one graduate readiness into tangible changes in what and how you teach?'
     ],
-    insight: 'Functional AI proficiency is necessary but not sufficient. The graduates who thrive will combine technical fluency with strategic intelligence, ethical judgement, and distinctly human capabilities.',
-    reframe: '"Many institutions are focused on AI tool proficiency. Employers consistently report that what they need is graduates who can think with AI, not just operate it."',
+    insight: 'Skills friction is the downstream result of every upstream failure. It surfaces when graduates arrive at work without the applied judgment, adaptability, and human capabilities employers depend on.',
+    reframe: 'Employers rate critical evaluation of AI outputs as graduates\' single weakest competency. HE leaders prioritize AI tool use (40%) while employers prioritize communication (50%) and adaptability (45%)',
     recs: [
-      'Map curricula against all four graduate AI capability dimensions: functional, strategic, ethical, and human',
-      'Create visible pathways for students to develop and demonstrate AI-adjacent skills across disciplines',
-      'Use employer feedback loops to continuously validate and refine the skills portfolio you\'re building'
+      'Balance development of functional proficiency, strategic intelligence, ethical stewardship, and critical human skills equally.',
+      'Track graduate readiness against employer-defined competency frameworks, not internal academic benchmarks.',
+      'Translate employer feedback on day-one performance into tangible curriculum and assessment changes.'
     ]
   }
 ];
