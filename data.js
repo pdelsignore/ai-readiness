@@ -18,7 +18,7 @@ const FRICTIONS = [
     name: 'Pace',
     desc: 'The widening gap between the speed of AI-driven workplace change and the slower cadence of curriculum and institutional decision-making.',
     qs: [
-      'To what extent are you monitoring the distance between AI developments in the workplace and what is currently reflected in your curricula?',
+      'To what extent are you monitoring the gap between AI developments in the workplace and what is currently reflected in your curricula?',
       'To what extent are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
     ],
     insight: 'AI is reshaping work faster than universities can adapt. When curriculum cycles lag behind workplace change, graduates enter the workforce with knowledge that is already obsolete relative to the tools industry deploys.',
@@ -34,7 +34,7 @@ const FRICTIONS = [
     name: 'Connection',
     desc: 'Weak feedback loops between education and employers, reducing alignment between workforce needs and learning design.',
     qs: [
-      'To what extent are you systematically capturing shifting workforce requirements from employers and ensuring that intelligence reaches curriculum decisions rapidly?',
+      'To what extent are you monitoring shifting workforce requirements from employers and ensuring that intelligence informs curriculum decisions rapidly?',
       'To what extent are your academic leaders actively collaborating with industry partners to shape graduate outcomes?'
     ],
     insight: 'When employers and institutions are not in structured dialogue, curriculum decisions are made with incomplete or outdated workforce signals. The result is misalignment between what is taught and what work requires.',
@@ -50,7 +50,7 @@ const FRICTIONS = [
     name: 'Capability',
     desc: 'Uneven faculty and instructor AI capability, limiting consistent integration of AI into learning experiences.',
     qs: [
-      'To what extent are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiative?',
+      'To what extent are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiatives?',
       'To what extent are you sustaining faculty AI development as a continuous institutional commitment rather than a one-time intervention?'
     ],
     insight: 'Faculty are the primary vehicle for graduate AI readiness. When their capability is uneven, student outcomes depend on individual instructor initiative rather than consistent institutional design.',
@@ -82,7 +82,7 @@ const FRICTIONS = [
     name: 'Experience',
     desc: 'A disconnect between access to AI tools and structured opportunities to practise, apply, and demonstrate real-world capability.',
     qs: [
-      'To what extent are you structuring student AI engagement to include both task-level shortcuts as well as authentic workplace applications?',
+      'To what extent are you structuring student AI engagement to include both task-level efficiencies as well as authentic workplace applications?',
       'To what extent are you identifying and addressing the competency gaps that represent the most significant barriers to graduate employability?'
     ],
     insight: 'Tool access without structured application does not produce applied capability. Students learn about AI but rarely have opportunities to work with it in authentic, assessed, workplace-relevant contexts.',
