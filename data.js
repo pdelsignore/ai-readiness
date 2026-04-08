@@ -18,8 +18,8 @@ const FRICTIONS = [
     name: 'Pace',
     desc: 'The widening gap between the speed of AI-driven workplace change and the slower cadence of curriculum and institutional decision-making.',
     qs: [
-      'How are you monitoring the distance between AI developments in the workplace and what is currently reflected in your curricula?',
-      'How are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
+      'To what extent are you monitoring the distance between AI developments in the workplace and what is currently reflected in your curricula?',
+      'To what extent are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
     ],
     insight: 'AI is reshaping work faster than universities can adapt. When curriculum cycles lag behind workplace change, graduates enter the workforce with knowledge that is already obsolete relative to the tools industry deploys.',
     reframe: 'Collectively, 66% of respondents (HE leaders, students, and employers) describe AI-driven workplace change as fast or very fast, with 70% of HE leaders expecting it to accelerate. Only 24% of respondents believe universities are keeping pace.',
@@ -34,8 +34,8 @@ const FRICTIONS = [
     name: 'Connection',
     desc: 'Weak feedback loops between education and employers, reducing alignment between workforce needs and learning design.',
     qs: [
-      'How are you systematically capturing shifting workforce requirements from employers — and how rapidly does that intelligence reach curriculum decisions?',
-      'How are your academic leaders actively collaborating with industry partners to shape graduate outcomes?'
+      'To what extent are you systematically capturing shifting workforce requirements from employers and ensuring that intelligence reaches curriculum decisions rapidly?',
+      'To what extent are your academic leaders actively collaborating with industry partners to shape graduate outcomes?'
     ],
     insight: 'When employers and institutions are not in structured dialogue, curriculum decisions are made with incomplete or outdated workforce signals. The result is misalignment between what is taught and what work requires.',
     reframe: 'Only 39% of institutions include industry partnerships among their AI investment focus areas, ranking last of six priorities. Yet 53% of employers say finding graduates with the right skills is their primary challenge.',
@@ -50,8 +50,8 @@ const FRICTIONS = [
     name: 'Capability',
     desc: 'Uneven faculty and instructor AI capability, limiting consistent integration of AI into learning experiences.',
     qs: [
-      'How are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiative?',
-      'How are you sustaining faculty AI development as a continuous institutional commitment rather than a one-time intervention?'
+      'To what extent are you developing faculty AI capability across the institution as a whole, rather than relying on individual initiative?',
+      'To what extent are you sustaining faculty AI development as a continuous institutional commitment rather than a one-time intervention?'
     ],
     insight: 'Faculty are the primary vehicle for graduate AI readiness. When their capability is uneven, student outcomes depend on individual instructor initiative rather than consistent institutional design.',
     reframe: 'Faculty AI expertise is the #1 barrier cited by 40% of HE leaders. Only 13% rate their facultys AI capability as very strong, and just 16% offer comprehensive ongoing AI training.',
@@ -66,8 +66,8 @@ const FRICTIONS = [
     name: 'Governance',
     desc: 'The absence of clear, practical guidance translating AI access into responsible, governed practice.',
     qs: [
-      'How are you communicating institutional AI policy in a way that is experienced as enabling and supportive rather than punitive or restrictive?',
-      'How are you embedding ethics and responsible AI use as a core requirement across all disciplines, rather than as a niche or elective provision?'
+      'To what extent are you communicating institutional AI policy in a way that is experienced as enabling and supportive rather than punitive or restrictive?',
+      'To what extent are you embedding ethics and responsible AI use as a core requirement across all disciplines, rather than as a niche or elective provision?'
     ],
     insight: 'When institutional AI guidance is absent, unclear, or perceived as punitive, students develop independent habits with no oversight. Those ungoverned habits can travel directly into the workplace as compliance and/or quality risks.',
     reframe: '49% of students use independently sourced AI tools versus 19% using university tools. 62% cannot say with certainty whether their institution has AI policies in place.',
@@ -82,8 +82,8 @@ const FRICTIONS = [
     name: 'Experience',
     desc: 'A disconnect between access to AI tools and structured opportunities to practise, apply, and demonstrate real-world capability.',
     qs: [
-      'How are you structuring student AI engagement to include both task-level shortcuts as well as authentic workplace applications?',
-      'How are you identifying and addressing the competency gaps that represent the most significant barriers to graduate employability?'
+      'To what extent are you structuring student AI engagement to include both task-level shortcuts as well as authentic workplace applications?',
+      'To what extent are you identifying and addressing the competency gaps that represent the most significant barriers to graduate employability?'
     ],
     insight: 'Tool access without structured application does not produce applied capability. Students learn about AI but rarely have opportunities to work with it in authentic, assessed, workplace-relevant contexts.',
     reframe: '68% of students are satisfied with access to AI tools, but only 18% are very satisfied with the depth of AI learning. Working alongside AI is the least-covered curriculum topic.',
@@ -98,8 +98,8 @@ const FRICTIONS = [
     name: 'Skills',
     desc: 'Misalignment between the capabilities graduates demonstrate and the applied judgment, adaptability, and collaboration employers require.',
     qs: [
-      'How are you balancing the development of functional AI proficiency with the cultivation of strategic intelligence, ethical stewardship, and critical human skills?',
-      'How are you translating employer feedback on day-one graduate readiness into tangible changes in what and how you teach?'
+      'To what extent are you balancing the development of functional AI proficiency with the cultivation of strategic intelligence, ethical stewardship, and critical human skills?',
+      'To what extent are you building sufficient agility into your curriculum review process to respond to labour market shifts as they emerge?'
     ],
     insight: 'Skills friction is the downstream result of every upstream failure. It surfaces when graduates arrive at work without the applied judgment, adaptability, and human capabilities employers depend on.',
     reframe: 'Employers rate critical evaluation of AI outputs as graduates\' single weakest competency. HE leaders prioritize AI tool use (40%) while employers prioritize communication (50%) and adaptability (45%)',
